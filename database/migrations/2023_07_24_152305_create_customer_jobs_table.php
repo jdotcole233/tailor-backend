@@ -24,7 +24,7 @@ return new class extends Migration
             $table->decimal("customer_job_price");
             $table->decimal("unit_price");
             $table->enum("payment_status", ['PAID', "UNPAID", "PART PAYMENT"])->default("UNPAID");
-            $table->enum("mode_of_payment", ['CASH', 'MOBILE MONEY', 'CHEQUE', 'BANK TRANSFER'])->default("CASH");
+            $table->enum("mode_of_payment", []);
             $table->json("extras")->nullable();
             $table->string("currency", 25)->default('GHS');
             $table->softDeletes();

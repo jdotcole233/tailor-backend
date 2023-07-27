@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('customer_job_payments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('customer_job_id');
+            $table->decimal('amount_paid', 5, 2);
+            $table->enum('mode_of_payment', ['CASH', 'MOBILE MONEY', 'CHEQUE', 'BANK TRANSFER'])->default("CASH");
+            $table->date('payment_date');
             $table->timestamps();
         });
     }
