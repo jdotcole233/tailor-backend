@@ -22,22 +22,30 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::controller(EmployeeController::class)->group(function () {
-    Route::get('employees',  'index');
-    Route::post('employees',  'store');
-    Route::put('employees/{id}',  'update');
+Route::prefix('tailor')->group(function () {
+    Route::controller(EmployeeController::class)->group(function () {
+        Route::get('employees',  'index');
+        Route::post('employees',  'store');
+        Route::put('employees/{id}',  'update');
+    });
+    Route::controller(CompanyController::class)->group(function () {
+        Route::get('companies', 'index');
+        Route::get('company/{id}', 'show');
+        Route::put('companies/{id}', 'update');
+    });
+    Route::controller(CustomerController::class)->group(function () {
+        Route::get('customers', 'index');
+        Route::get('customers/{id}', 'show');
+        Route::post('customers', 'store');
+        Route::put('customers/{id}', 'update');
+    });
 });
+
 
 // Public routes
 Route::post('companies',[CompanyController::class, 'store']);
 
 
-Route::controller(CompanyController::class)->group(function () {
-    Route::get('companies', 'index');
-    Route::get('company/{id}', 'show');
-    Route::put('companies/{id}', 'update');
-});
 
 
-Route::get('customers', [CustomerController::class, 'index']);
-Route::get('customers/{id}', [CustomerController::class, 'show']);
+

@@ -25,7 +25,7 @@ class CustomerController extends Controller
     {
         $validated = $request->validated();
         DB::transaction(function () use (&$customer, $validated) {
-            $customer = Customer::create($validated);
+            $customer = Customer::create($validated + ['company_id' => 1]);
         });
 
         return response()->json([
@@ -49,11 +49,11 @@ class CustomerController extends Controller
     {
         $validated = $request->validated();
         DB::transaction(function () use (&$customer, $validated, $id) {
-            $customer = Customer::find($id)->update($validated + ['company_id' => 1]);
+            $customer = Customer::find($id)->update($validated);
         });
 
         return response()->json([
-            'data' => $customer,
+            'data' => 1,
             'message' => 'Updated successfully'
         ], 201);
     }
